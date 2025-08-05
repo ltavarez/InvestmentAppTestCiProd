@@ -21,7 +21,7 @@ builder.Services.AddControllers(opt =>
 }).AddJsonOptions(opt =>
     {
         opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-});
+    });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddPersistenceLayerIoc(builder.Configuration);
@@ -42,11 +42,8 @@ var app = builder.Build();
 await app.Services.RunIdentitySeedAsync();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwaggerExtension(app);
-    app.MapOpenApi();
-}
+app.UseSwaggerExtension(app);
+app.MapOpenApi();
 
 app.UseHttpsRedirection();
 app.UseExceptionHandler();
