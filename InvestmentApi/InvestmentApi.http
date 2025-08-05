@@ -1,0 +1,54 @@
+@InvestmentApi_HostAddress = https://localhost:7121
+
+GET {{InvestmentApi_HostAddress}}/api/v1/AssetType HTTP/1.1
+Accept: application/json
+
+###
+
+GET {{InvestmentApi_HostAddress}}/api/v1/AssetType/2 HTTP/1.1
+Accept: application/json
+
+###
+
+POST {{InvestmentApi_HostAddress}}/api/v1/AssetType HTTP/1.1
+Accept: application/json
+Content-type: application/json
+{
+    "name": "es una prueba",
+    "description": "es la desc de la prueba"
+}
+
+###
+
+PUT {{InvestmentApi_HostAddress}}/api/v1/AssetType/2 HTTP/1.1
+Accept: application/json
+Content-type: application/json
+{
+    "name": "Criptomoneda 2",
+    "description": "Es una moneda virtual 2"
+}
+
+###
+
+DELETE {{InvestmentApi_HostAddress}}/api/v1/AssetType/11 HTTP/1.1
+Accept: application/json
+
+###
+GET {{InvestmentApi_HostAddress}}/api/v2/AssetType HTTP/1.1
+Accept: application/json
+
+###
+
+@id=0
+DELETE {{InvestmentApi_HostAddress}}/api/v1/Asset/{{id}}
+
+###
+
+POST {{InvestmentApi_HostAddress}}/api/v1/Asset
+Content-Type: application/json
+
+{
+  //SaveAssetDto
+}
+
+###

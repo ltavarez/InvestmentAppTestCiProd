@@ -1,0 +1,42 @@
+﻿@model SaveAssetViewModel
+@{
+    bool editMode = ViewBag.EditMode ?? false;//collapse operator
+    ViewData["Title"] = "Asset save";
+}
+
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card">
+        <div class="card-header bg-success text-light"><h5 class="text-center">@(editMode ? "Edit - " + Model.Name : "New Asset")</h5></div>
+        <div class="card-body">
+            <form asp-controller="Asset" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Name:</label>
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Symbol" class="form-label">Symbol:</label>
+                    <input class="form-control" asp-for="Symbol" />
+                    <span asp-validation-for="Symbol" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="AssetTypeId" class="form-label">Asset type:</label>
+                    <select asp-for="AssetTypeId" class="form-select" asp-items="@(new SelectList(ViewBag.AssetTypes, "Id", "Name"))">
+                        <option value="0">Select any option</option>                    
+                    </select>
+                    <span asp-validation-for="AssetTypeId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description:</label>
+                    <textarea class="form-control" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end"><i class="bi bi-floppy2"></i> Save</button>
+                    <a asp-controller="Asset" asp-action="Index" class="btn btn-outline-warning float-end me-2"><i class="bi bi-arrow-left-short"></i> Back to list</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

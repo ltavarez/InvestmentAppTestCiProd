@@ -1,0 +1,19 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "TimeTrigger": "0 10 * * *", //used for testing purposes, runs every minute 0 */1 * * * *
+
+    "UseInMemoryDatabase": false,
+    "ConnectionStrings:DefaultConnection": "Server=TryHard0x\\SQLEXPRESS;Database=InvestmentApp2025;Trusted_Connection=true;TrustServerCertificate=true",
+    "ConnectionStrings:IdentityConnection": "Server=TryHard0x\\SQLEXPRESS;Database=InvestmentApp2025;Trusted_Connection=true;TrustServerCertificate=true",
+
+    "MailSettings:EmailFrom": "phpitladiplomado@gmail.com",
+    "MailSettings:SmtpHost": "smtp.gmail.com",
+    "MailSettings:SmtpPort": 587,
+    "MailSettings:SmtpUser": "phpitladiplomado@gmail.com",
+    "MailSettings:SmtpPass": "xkgavsifmahcumty",
+    "MailSettings:DisplayName": "Investment mail"
+  }
+}
