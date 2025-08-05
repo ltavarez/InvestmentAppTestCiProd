@@ -1,0 +1,100 @@
+﻿
+@using InvestmentApp.Core.Application.ViewModels.Asset
+@using InvestmentApp.Core.Application.Interfaces
+@using InvestmentApp.Core.Domain.Common.Enums
+
+@model List<AssetForPortfolioViewModel>;
+@{
+    ViewData["Title"] = "Asset types";
+    if (User.IsInRole(Roles.Investor.ToString()))
+    {
+        Layout = "_LayoutInvestor";
+    }
+}
+
+<div class="row">
+    <div class="text-center">
+        <h1 class="display-4">Investment portfolio - @ViewBag.Portfolio.Name</h1>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 col-md-12">
+        <a class="btn btn-outline-warning me-1" asp-controller="InvestmentPortFolio" asp-action="Index" asp-route-portfolioId="@ViewBag.Portfolio.Id"><i class="bi bi-arrow-left-short"></i> Back to investment portfolio</a>
+        <a class="btn btn-outline-success" asp-controller="InvestmentAsset" asp-action="Create" asp-route-portfolioId="@ViewBag.Portfolio.Id"><i class="bi bi-file-earmark-plus"></i> Add asset to portfolio</a>
+    </div>
+
+
+</div>
+
+<div class="row mt-2">
+    <div class="col-12 col-md-12">
+
+        <form asp-action="AssetsDetails" asp-controller="InvestmentPortfolio" method="GET">
+            <input type="hidden" name="portfolioId" value="@ViewBag.Portfolio.Id" />
+            <div class="d-flex justify-content-between">
+                <div class="input-group me-1">
+                    <span class="input-group-text">Asset Name:</span>
+                    <input type="text" name="assetName" class="form-control">
+                </div>
+                <div class="input-group me-1">
+                    <span class="input-group-text">Asset type:</span>
+                    <select class="form-select" name="assetTypeId">
+                        <option value="">Select any option</option>
+                        @if (ViewBag.AssetTypes != null)
+                            foreach (var assetType in ViewBag.AssetTypes)
+                            {
+                                <option value="@assetType.Id">@assetType.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="input-group me-1">
+                    <span class="input-group-text">Order by:</span>
+                    <select class="form-select" name="assetOrderBy">
+                        <option value="">Select any option</option>
+                        <option value="1">Asset name</option>
+                        <option value="2">Asset value</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-outline-primary float-start"><i class="bi bi-filter"></i>Filters</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="row mt-2">
+    @if (Model.Count == 0)
+    {
+        <div class="text-center">
+            <h5 class="display-5">There aren't assets</h5>
+        </div>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-12 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name @(item.AssetType != null ? "-" + item.AssetType.Name : "")</h5>
+                        <h6 class="card-subtitle">@item.Symbol - $US @item.CurrentValue</h6>
+                        <p class="card-text mt-2">
+                            @item.Description
+                        </p>
+                        <div class="mt-2">
+                            <a class="btn btn-outline-danger float-end" asp-controller="InvestmentAsset" asp-action="Delete" asp-route-assetId="@item.Id" asp-route-portfolioId="@ViewBag.Portfolio.Id"><i class="bi bi-trash"></i> Remove asset </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+

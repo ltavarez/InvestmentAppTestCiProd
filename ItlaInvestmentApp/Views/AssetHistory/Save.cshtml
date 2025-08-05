@@ -1,0 +1,31 @@
+﻿@model SaveAssetHistoryViewModel
+@{
+    bool editMode = ViewBag.EditMode ?? false;//collapse operator
+    ViewData["Title"] = "Asset history save";
+}
+
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card">
+        <div class="card-header bg-success text-light"><h5 class="text-center">@(editMode ? "Edit" : "New history")</h5></div>
+        <div class="card-body">
+            <form asp-controller="AssetHistory" asp-action="@(editMode ? "Edit" : "Create")" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="AssetId" />
+                <div class="mb-3">
+                    <label asp-for="HistoryValueDate" class="form-label">History Value Date:</label>
+                    <input disabled="@(editMode ? "disabled" : null)" type="date" class="form-control" asp-for="HistoryValueDate" />
+                    <span asp-validation-for="HistoryValueDate" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Value" class="form-label">Value($US):</label>
+                    <input type="number" step="any" class="form-control" asp-for="Value" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>   
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end"><i class="bi bi-floppy2"></i> Save</button>
+                    <a asp-controller="Asset" asp-action="Index" class="btn btn-outline-warning float-end me-2"><i class="bi bi-arrow-left-short"></i> Back to list</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

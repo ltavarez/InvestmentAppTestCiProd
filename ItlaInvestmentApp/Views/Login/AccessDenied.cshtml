@@ -1,0 +1,19 @@
+﻿@using InvestmentApp.Core.Application.Interfaces
+@using InvestmentApp.Core.Domain.Common.Enums
+
+@{
+    ViewData["Title"] = "Access denied";
+    bool isAdmin = true;
+
+    if (!string.IsNullOrWhiteSpace(ViewBag.CurrentRol) && ViewBag.CurrentRol == Roles.Investor.ToString())
+    {
+        isAdmin = false;
+        Layout = "_LayoutInvestor";
+    }
+    
+}
+
+<div class="text-center">
+    <h1 class="display-4">Access denied</h1>
+    <p> Your user does not have permission to access this section - <a asp-controller="@(isAdmin ? "Home" : "InvestorHome")" asp-action="Index"><i class="bi bi-house-door"></i> Home</a> </p>
+</div>

@@ -1,0 +1,34 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login Page";
+    Layout = "_LayoutAnonymous";
+}
+
+<div class="d-flex justify-content-center">
+
+    <div class="col-12 col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-light"><h5 class="text-center">Login user</h5></div>
+            <div class="card-body">
+                @Html.ValidationSummary(false,"",new {@class = "text-danger"})
+                <form asp-controller="Login" asp-action="Index" method="POST">
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">UserName:</label>
+                        <input class="form-control" asp-for="UserName" />                   
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Password:</label>
+                        <input class="form-control" asp-for="Password" />                    
+                    </div>
+                    
+                    <div>
+                        <button type="submit" class="btn btn-outline-primary float-end"><i class="bi bi-door-open"></i> Login</button>
+                        <a asp-controller="Login" asp-action="register" class="btn btn-outline-info float-end me-2"><i class="bi bi-person-add"></i> Register</a>
+                        <a asp-controller="Login" asp-action="ForgotPassword" class="btn btn-outline-warning float-end me-2"><i class="bi bi-person-fill-exclamation"></i> Forgot password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>

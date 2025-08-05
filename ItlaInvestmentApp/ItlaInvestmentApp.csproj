@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Tesseract" Version="5.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\InvestmentApp.Core.Application.csproj" />
+    <ProjectReference Include="..\InvestmentApp.Core.Domain\InvestmentApp.Core.Domain.csproj" />
+    <ProjectReference Include="..\InvestmentApp.Infrastructure.Identity\InvestmentApp.Infrastructure.Identity.csproj" />
+    <ProjectReference Include="..\InvestmentApp.Infrastructure.Shared\InvestmentApp.Infrastructure.Shared.csproj" />
+    <ProjectReference Include="..\Persistence\InvestmentApp.Infrastructure.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Middlewares\" />
+    <Folder Include="tessdata\" />
+    <Folder Include="wwwroot\Images\Users\" />
+  </ItemGroup>
+
+</Project>

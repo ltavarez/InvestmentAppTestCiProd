@@ -1,0 +1,28 @@
+﻿@model SaveInvestmentAssetViewModel
+@{  
+    ViewData["Title"] = "Add Asset in portfolio";
+}
+
+<div class="col-12 col-md-6 offset-md-3 ">
+    <div class="card">
+        <div class="card-header bg-success text-light"><h5 class="text-center">Add Asset to portfolio</h5></div>
+        <div class="card-body">
+            <form asp-controller="InvestmentAsset" asp-action="Create" method="POST">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="InvestmentPortfolioId" />
+       
+                <div class="mb-3">
+                    <label asp-for="AssetId" class="form-label">Asset type:</label>
+                    <select asp-for="AssetId" class="form-select" asp-items="@(new SelectList(ViewBag.Assets, "Id", "Name"))">
+                        <option value="0">Select any option</option>                  
+                    </select>
+                    <span asp-validation-for="AssetId" class="text-danger"></span>
+                </div>             
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end"><i class="bi bi-floppy2"></i> Save</button>
+                    <a asp-controller="InvestmentPortfolio" asp-action="AssetsDetails" asp-route-portfolioId="@Model.InvestmentPortfolioId" class="btn btn-outline-warning float-end me-2"><i class="bi bi-arrow-left-short"></i>Back to list</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
